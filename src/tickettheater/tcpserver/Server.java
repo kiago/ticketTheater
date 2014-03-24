@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,13 +56,27 @@ public class Server {
             try {
                 System.out.println("Expecting Hello from client...");
                 //sleep(5000);
+                try {
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    //ATTENTION AU PORT
+                    String url = "jdbc:mysql://localhost:3306/resaTheater";
+                    conn = DriverManager.getConnection(url, "root", "root");
+
+
+                } catch (ClassNotFoundException | IllegalAccessException |
+                        InstantiationException | SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+
                 if ("Hello".equals(in_socket.readLine())) {
                     System.out.println("Client is nice :) Let's be polite...");
 
 
 
                     out_socket.println(fetchTitles());
-                                        System.out.println(fetchTitles());
+                    System.out.println(fetchTitles());
+                                        conn.close();
+
 
                 }
             } catch (Exception e) {
@@ -114,14 +129,14 @@ public class Server {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            toReturn = rs.getString(1);
+            toReturn = rs.getString("title");
 
 
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        testTitle=toReturn;
+        testTitle = toReturn;
         return toReturn;
     }
 
