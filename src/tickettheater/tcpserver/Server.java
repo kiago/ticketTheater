@@ -61,13 +61,14 @@ public class Server {
                     //ATTENTION AU PORT
                     String url = "jdbc:mysql://localhost:3306/resaTheater";
                     conn = DriverManager.getConnection(url, "root", "root");
+                    System.out.println("connection to database");
 
 
                 } catch (ClassNotFoundException | IllegalAccessException |
                         InstantiationException | SQLException ex) {
                     System.err.println(ex.getMessage());
                 }
-
+                    //fetchTitles();
                 if ("Hello".equals(in_socket.readLine())) {
                     System.out.println("Client is nice :) Let's be polite...");
 
@@ -128,8 +129,10 @@ public class Server {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-
-            toReturn = rs.getString("title");
+if(rs.next()){
+   toReturn = rs.getString(1);
+}
+            //toReturn = rs.getString("title");
 
 
 

@@ -43,7 +43,7 @@ public class TicketTheater {
         //System.out.println("Sending Hello to server");
         outSocket.println("Hello");
         //System.out.println("Waiting answer from server");
-            System.out.println(inSocket.readLine());
+        System.out.println(inSocket.readLine());
         
         System.out.println("End.");
 
