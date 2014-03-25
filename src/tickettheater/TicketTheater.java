@@ -43,16 +43,16 @@ public class TicketTheater {
         //System.out.println("Sending Hello to server");
         outSocket.println("Hello");
         //System.out.println("Waiting answer from server");
+        int i=0;
+        for(i=0;i<3;i++){
         System.out.println(inSocket.readLine());
-        
+        }
         System.out.println("End.");
-
-
 
 
         resaForm ticketing = new resaForm();
         ticketing.setVisible(true);
-        System.out.println(Server.testTitle);
+        //System.out.println(Server.testTitle);
         // TODO code application logic here
     }
 }
