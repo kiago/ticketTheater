@@ -43,10 +43,24 @@ public class TicketTheater {
         //System.out.println("Sending Hello to server");
         outSocket.println("Hello");
         //System.out.println("Waiting answer from server");
-        int i=0;
-        for(i=0;i<3;i++){
-        System.out.println(inSocket.readLine());
+        String s = inSocket.readLine();
+        System.out.println(s);
+
+        String str[] = s.split(",");
+        System.out.println(str.length);
+
+        int i = 0;
+        for (i = 1; i < 3; i++) {
+
+            System.out.println(str[i]);
+            /*je n'arrive pas à transmettre les titres des pièces 
+             * à la combobox de l'IHM
+             
+             resaForm.jComboBox1.addItem(makeObj("str[i]"));
+             */
         }
+        //resaForm.jComboBox1.addItem(str[0]);
+
         System.out.println("End.");
 
 
@@ -54,5 +68,14 @@ public class TicketTheater {
         ticketing.setVisible(true);
         //System.out.println(Server.testTitle);
         // TODO code application logic here
+    }
+
+    private static Object makeObj(final String item) {
+        return new Object() {
+            @Override
+            public String toString() {
+                return item;
+            }
+        };
     }
 }

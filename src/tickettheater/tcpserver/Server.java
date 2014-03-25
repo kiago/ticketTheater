@@ -71,9 +71,6 @@ public class Server {
                 //fetchTitles();
                 if ("Hello".equals(in_socket.readLine())) {
                     System.out.println("Client is nice :) Let's be polite...");
-
-
-
                     out_socket.println(fetchTitles());
                     conn.close();
 
@@ -119,7 +116,7 @@ public class Server {
     }
 
     private String fetchTitles() {
-        String toReturn = null;
+        String toReturn = "";
         System.out.println("[FETCHING TITLES]");
         String query = "SELECT title FROM piecesDeTheatre";
 
@@ -128,19 +125,18 @@ public class Server {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
+
             while (rs.next()) {
-                if (rs.next()) {
-                    toReturn = rs.getString(1);
-                }
+
+                toReturn = toReturn + "," + rs.getString(1);
+
             }
             //toReturn = rs.getString("title");
-
-//hgfjikojbdhf
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        testTitle = toReturn;
+        //testTitle = toReturn;
         return toReturn;
     }
 

@@ -13,7 +13,8 @@ public class resaForm extends javax.swing.JFrame {
     /**
      * Creates new form resaForm
      */
-    public String res = "test";
+    public static String title;
+    public static String quantity;
 
     public resaForm() {
         initComponents();
@@ -65,7 +66,11 @@ public class resaForm extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Place", "2 Places", "3 Places", "4 Places", "5 Places" }));
 
@@ -142,7 +147,11 @@ public class resaForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //affichage du message apres avoir cliqué sur bouton VALIDER
-        jLabel1.setText(res);
+        //récupération de la quantité et de la piece de theatre
+        title = jComboBox1.getSelectedItem().toString();
+        quantity = jComboBox2.getSelectedItem().toString();
+        //réaliser l'output vers le serveur
+        jLabel1.setText("Vous avez réservé" + quantity + " pour voir " + title);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -152,14 +161,17 @@ public class resaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        if(jCheckBox1.isSelected()){
-        jButton1.setEnabled(true);
-        }
-        else if(!(jCheckBox1.isSelected())){
-        jButton1.setEnabled(false);
+        if (jCheckBox1.isSelected()) {
+            jButton1.setEnabled(true);
+        } else if (!(jCheckBox1.isSelected())) {
+            jButton1.setEnabled(false);
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,7 +211,7 @@ public class resaForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
+    protected static javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;

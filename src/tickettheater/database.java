@@ -15,6 +15,7 @@ import java.sql.Statement;
  * @author kiago
  */
 public class database {
+
     public static String testTitle = "decfrgtvl";
     Connection conn;
 //connection à la base de données
@@ -85,7 +86,7 @@ public class database {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        testTitle=title;
+        testTitle = title;
         return title;
     }
 
